@@ -1,6 +1,7 @@
 package com.microservices.ProductmicroServices.service;
 
 import com.microservices.ProductmicroServices.entity.ProductEntity;
+import com.microservices.ProductmicroServices.exception.ProductServiceCustomException;
 import com.microservices.ProductmicroServices.model.ProductRequest;
 import com.microservices.ProductmicroServices.model.ProductResponse;
 import com.microservices.ProductmicroServices.respository.ProductRepository;
@@ -39,7 +40,7 @@ public class productServiceImpl implements ProductService{
         log.info("get the product for productId {}"+productId);
 
        ProductEntity product=productRepository.findById(productId)
-               .orElseThrow(()->new RuntimeException("Product with given couldnt find"));
+               .orElseThrow(()->new ProductServiceCustomException("Product with given couldnt find","Product not found"));
 
         ProductResponse productResponse=new ProductResponse();
         BeanUtils.copyProperties(product,productResponse);
