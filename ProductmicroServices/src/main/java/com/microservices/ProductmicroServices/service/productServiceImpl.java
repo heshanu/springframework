@@ -10,6 +10,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -46,5 +47,10 @@ public class productServiceImpl implements ProductService{
         BeanUtils.copyProperties(product,productResponse);
 
         return productResponse;
+    }
+
+    @Override
+    public List<ProductEntity> getAll() {
+        return productRepository.findAll();
     }
 }
